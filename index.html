@@ -784,10 +784,11 @@
       <strong>Groepsstanden</strong> bewegen mee met de werkelijke uitslagen die je invult.
     </p>
     <p>
-      <strong>🍺 Drankspel:</strong> kies per match wie je denkt dat wint (Thuis · Gelijk · Uit) en zet er drank op in (atje, shotje, pintje of glas).<br>
-      ✅ <strong>Juist getipt</strong> → tegenstander drinkt<br>
+      <strong>🍺 Drankspel:</strong> kies per match wie je denkt dat wint (🏠 Thuis · X · ✈️ Uit) en zet er drank op in (atje of shotje).<br>
+      ✅ <strong>Juist getipt</strong> → je <strong>deelt uit</strong>, tegenstander drinkt<br>
       ❌ <strong>Fout getipt</strong> → jij drinkt<br>
-      Het totaaloverzicht vind je in de tab "🍺 Drankoverzicht".
+      🔥 <strong>Juist getipt + exacte score</strong> → inzet wordt <span style="color:var(--gold);">×2</span>!<br>
+      Het totaaloverzicht vind je in de tab "🍺 Drankoverzicht" en wat jij persoonlijk moet drinken in "🥃 Wat moet ik drinken?".
     </p>
     <p style="font-size:0.85rem; opacity:0.7;">
       Alles wordt opgeslagen in je browser (localStorage). Cache wissen = data weg. Gebruik Export om een back-up te maken.
@@ -829,7 +830,25 @@
 <input type="file" id="importFile" accept=".json" style="display:none" />
 
 <footer>
-  <p>WK 2026 (Canada · Mexico · USA) — Schema groepsfase 20–26 juni · Schema kan wijzigen — controleer steeds via fifa.com.</p>
+  <svg class="stadium" viewBox="0 0 600 120" xmlns="http://www.w3.org/2000/svg" fill="none">
+    <defs>
+      <linearGradient id="stadGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#ffd23f" stop-opacity="0.6"/>
+        <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0.3"/>
+      </linearGradient>
+    </defs>
+    <ellipse cx="300" cy="100" rx="280" ry="20" stroke="url(#stadGrad)" stroke-width="2"/>
+    <ellipse cx="300" cy="100" rx="220" ry="14" stroke="url(#stadGrad)" stroke-width="1.5"/>
+    <ellipse cx="300" cy="100" rx="160" ry="9" stroke="url(#stadGrad)" stroke-width="1"/>
+    <path d="M30 100 Q300 -10 570 100" stroke="url(#stadGrad)" stroke-width="2" fill="none"/>
+    <circle cx="60" cy="55" r="3" fill="#ffd23f" opacity="0.6"/>
+    <circle cx="540" cy="55" r="3" fill="#ffd23f" opacity="0.6"/>
+    <circle cx="160" cy="25" r="2" fill="#ff3d8b" opacity="0.7"/>
+    <circle cx="440" cy="25" r="2" fill="#ff3d8b" opacity="0.7"/>
+    <circle cx="300" cy="10" r="3" fill="#ffd23f"/>
+  </svg>
+  <p>WK 2026 (Canada · Mexico · USA) — Schema groepsfase 20–26 juni · Schema kan wijzigen — check altijd fifa.com.</p>
+  <p style="opacity:0.6; margin-top:6px;">⚽ Lokaal opgeslagen · 🍻 Drink met mate · 🎲 Gok niet écht</p>
 </footer>
 
 <script>
@@ -889,27 +908,58 @@ const DRINKS = [
 ];
 const UNITS = ["Atje", "Shotje"];
 
+// ISO codes voor vlag-afbeeldingen via flagcdn.com
+const TEAM_CODES = {
+  "Brazilië": "br", "Haïti": "ht", "Turkije": "tr", "Paraguay": "py",
+  "Nederland": "nl", "Zweden": "se", "Duitsland": "de", "Ivoorkust": "ci",
+  "Ecuador": "ec", "Curaçao": "cw", "Tunesië": "tn", "Japan": "jp",
+  "Spanje": "es", "Saoedi-Arabië": "sa", "België": "be", "Iran": "ir",
+  "Uruguay": "uy", "Kaapverdië": "cv", "Nieuw-Zeeland": "nz", "Egypte": "eg",
+  "Argentinië": "ar", "Oostenrijk": "at", "Frankrijk": "fr", "Irak": "iq",
+  "Noorwegen": "no", "Senegal": "sn", "Jordanië": "jo", "Algerije": "dz",
+  "Portugal": "pt", "Oezbekistan": "uz", "Engeland": "gb-eng", "Ghana": "gh",
+  "Panama": "pa", "Kroatië": "hr", "Colombia": "co", "DR Congo": "cd",
+  "Zwitserland": "ch", "Canada": "ca", "Bosnië-Herz.": "ba", "Qatar": "qa",
+  "Marokko": "ma", "Schotland": "gb-sct", "USA": "us", "Australië": "au"
+};
+function flagUrl(team) {
+  const code = TEAM_CODES[team];
+  return code ? `https://flagcdn.com/w160/${code}.png` : "";
+}
+
 const QUOTES = [
-  { author: "Albert Einstein",     text: "Een wijze man die gokt en drinkt, die kan de wereld aan." },
-  { author: "Mark Twain",          text: "Stoppen met drinken is makkelijk, ik heb het al duizend keer gedaan." },
-  { author: "Confucius",           text: "Wie veel inzet en weinig drinkt, mist de helft van het feest." },
-  { author: "Napoleon Bonaparte",  text: "Een veldslag wint men met paarden. Een feestje met jägermeister." },
-  { author: "Socrates",            text: "Ik weet één ding zeker: na drie jägerbombs weet ik niets meer." },
-  { author: "Winston Churchill",   text: "Ik heb meer aan de bar geleerd dan op het slagveld." },
-  { author: "Johan Cruijff",       text: "Voetbal is simpel — gokken erop maakt het ingewikkeld." },
-  { author: "Louis van Gaal",      text: "Het is altijd de schuld van de jäger. Altijd." },
-  { author: "Diego Maradona",      text: "God speelt mee, maar Hij betaalt de ronde nooit." },
-  { author: "Lionel Messi",        text: "Talent wint matches, drank wint feesten." },
-  { author: "Frank Sinatra",       text: "Gokken zonder drinken is als voetbal zonder bal." },
-  { author: "Pep Guardiola",       text: "Tiki-taka op het veld, jaka-jaka aan de toog." },
-  { author: "Cristiano Ronaldo",   text: "Suuuuuu… nog één shotje." },
-  { author: "Oscar Wilde",         text: "Ik kan elke verleiding weerstaan, behalve die van een atje na een goal." },
-  { author: "Plato",               text: "De ideale wereld bestaat — ergens tussen het derde en het vierde shotje in." },
-  { author: "Lady Luck",           text: "Ik blijf alleen zolang er bier in het glas zit." },
-  { author: "Anonieme Belg",       text: "Een Belg gokt niet — hij maakt voorspellingen met overtuiging." },
-  { author: "De Bondscoach",       text: "We hadden de match wél gewonnen als ik op tijd had ingezet." },
-  { author: "Friedrich Nietzsche", text: "Wat je niet doodt, drink je gewoon weg." },
-  { author: "Voltaire",            text: "Het beste argument tegen gokken? Een jägerbomb. Het wint altijd." }
+  { author: "Albert Einstein",       text: "E = mc². En m staat voor 'meer jäger'." },
+  { author: "Homer Simpson",         text: "Op de drank: oorzaak van — én oplossing voor — al onze inzetten." },
+  { author: "Je oma",                text: "In mijn tijd dronken we nog wijn uit een tandenglas. Verwen jezelf maar, snoezeke." },
+  { author: "Je toekomstige ik",     text: "Drink dat shotje. Geloof me. Ik heb het al overleefd. Bijna." },
+  { author: "Jezus",                 text: "Ik veranderde water in wijn. Waarom denk je dat ze Mij blijven herdenken met een shotje?" },
+  { author: "Lothar Matthäus",       text: "Voetbal is een spel van 22 mannen, en aan het einde drinkt de Belg." },
+  { author: "Wesley Sneijder",       text: "Mijn carrière in 1 zin: de bal in de kruising, de jäger in de keel." },
+  { author: "Johan Cruijff",         text: "Elk nadeel heb z'n voordeel. Verloren? Atje. Gewonnen? Atje." },
+  { author: "Louis van Gaal",        text: "Áltijd, áltijd, áltijd is het de schuld van die laatste shot." },
+  { author: "Cristiano Ronaldo",     text: "SUIIIII... shotje? Suii. Suii. Suii." },
+  { author: "Lionel Messi",          text: "Vijf Champions Leagues, acht Ballons d'Or, één leverwaarde te hoog." },
+  { author: "Diego Maradona",        text: "De hand van God hield mijn glas vast." },
+  { author: "Pep Guardiola",         text: "Tiki-taka-baco. In dat ritme spelen we." },
+  { author: "Marc Wilmots",          text: "Een atje is geen straf, het is een kans." },
+  { author: "Vincent Kompany",       text: "Captain, leider, legende, ronde-betaler." },
+  { author: "Eden Hazard",           text: "Vroeger sprintte ik over heel het veld. Nu enkel naar de bar." },
+  { author: "Romelu Lukaku",         text: "Niemand pakt me bij m'n shouder. En niemand pakt mijn shotje." },
+  { author: "Kevin De Bruyne",       text: "Mijn assists zijn beter dan mijn excuses na een avondje uit." },
+  { author: "Mark Twain",            text: "Stoppen met drinken? Heb ik al 47 keer gedaan tijdens deze WK." },
+  { author: "Winston Churchill",     text: "Ik heb meer matches gewonnen aan de bar dan op het veld." },
+  { author: "Socrates",              text: "Ik weet dat ik niks weet. Behalve dat shot 4 een fout was." },
+  { author: "Confucius",             text: "Hij die voorspelt zonder te drinken, leeft. Niet leuk, maar wel lang." },
+  { author: "Plato",                 text: "De schaduw aan de wand is van jou na 3 baco's." },
+  { author: "Friedrich Nietzsche",   text: "Wat je niet drinkt, drinkt jou." },
+  { author: "Oscar Wilde",           text: "Ik kan álles weerstaan, behalve een verloren weddenschap én een open bar." },
+  { author: "Napoleon Bonaparte",    text: "Waterloo verloren — maar wel een atje gewonnen." },
+  { author: "Frank Sinatra",         text: "Strangers in the night... délen een fles." },
+  { author: "Anonieme Belg",         text: "Wij gokken niet, wij hebben gewoon een mening met inzet." },
+  { author: "De Bondscoach",         text: "Tactiek, drive, mentaliteit. Maar vooral: een goeie ronde." },
+  { author: "Lady Luck",             text: "Ik bezoek alleen mensen met goeie drank in de kast." },
+  { author: "Voltaire",              text: "God is dood, maar de jägerbomb leeft eeuwig." },
+  { author: "Een wijze kater",       text: "Het was het waard. Het was niet het waard. Het was het waard." }
 ];
 
 const DAY_LABELS = {
@@ -966,12 +1016,24 @@ function calcPoints(pred, actual) {
 
 /* ====================== DRANK ====================== */
 // pick: "h" (thuis), "d" (gelijk), "a" (uit)
-function calcDrinkResult(bet, actual) {
+// Returns: { status: "won"|"lost", base, effective, bonus }
+//  - "won"  = jij hebt juist getipt → tegenstander drinkt
+//  - "lost" = fout getipt → jij drinkt
+//  - bonus  = juiste winnaar én exacte score → inzet x2
+function calcDrinkResult(bet, actual, prediction) {
   if (!bet || !bet.pick || !bet.amount || !actual) return null;
   if (actual.h === "" || actual.a === "") return null;
   const ah = +actual.h, aa = +actual.a;
   const actOutcome = ah > aa ? "h" : (ah < aa ? "a" : "d");
-  return bet.pick === actOutcome ? "won" : "lost";
+  const status = bet.pick === actOutcome ? "won" : "lost";
+  const base = +bet.amount;
+  let bonus = false;
+  if (status === "won" && prediction
+      && prediction.h !== "" && prediction.a !== ""
+      && +prediction.h === ah && +prediction.a === aa) {
+    bonus = true;
+  }
+  return { status, base, effective: bonus ? base * 2 : base, bonus };
 }
 
 /* ====================== RENDER ====================== */
@@ -1025,58 +1087,98 @@ function renderMatches() {
   });
 }
 
+function flagImg(team, fallbackEmoji) {
+  const url = flagUrl(team);
+  if (url) return `<img class="team-flag-img" src="${url}" alt="${team}" loading="lazy" onerror="this.outerHTML='<span class=&quot;team-flag-img fallback&quot;>${fallbackEmoji}</span>'" />`;
+  return `<span class="team-flag-img fallback">${fallbackEmoji}</span>`;
+}
+
 function renderMatchCard(m) {
   const pred = predictions[m.id] || { h: "", a: "" };
   const act  = results[m.id]     || { h: "", a: "" };
   const bet  = drinkBets[m.id]   || { pick: "", amount: 1, unit: "Shotje", drink: "Jägermeister" };
   const pts  = calcPoints(pred, act);
-  const drinkOutcome = calcDrinkResult(bet, act);
+  const drinkOutcome = calcDrinkResult(bet, act, pred);
 
   const card = document.createElement("div");
   card.className = "match-card";
 
-  const ptsLabel = pts === 3 ? `<span class="pts win">🎯 +3 pt</span>`
-                  : pts === 1 ? `<span class="pts partial">✅ +1 pt</span>`
-                  : pts === 0 ? `<span class="pts miss">❌ 0 pt</span>`
+  const ptsLabel = pts === 3 ? `<span class="pts-badge win">🎯 +3 pt</span>`
+                  : pts === 1 ? `<span class="pts-badge partial">✅ +1 pt</span>`
+                  : pts === 0 ? `<span class="pts-badge miss">❌ 0 pt</span>`
                   : "";
 
-  const drinkText = `${bet.amount} ${bet.unit.toLowerCase()}${bet.amount > 1 ? 's' : ''} ${bet.drink}`;
-  const drinkResultHtml = drinkOutcome === "won"
-    ? `<div class="drink-result won">✅ Tip juist! Tegenstander drinkt: ${drinkText}</div>`
-    : drinkOutcome === "lost"
-    ? `<div class="drink-result lost">❌ Tip fout! Jij drinkt: ${drinkText}</div>`
-    : "";
+  const hasActual = act.h !== "" && act.a !== "";
+
+  const drinkText = `${bet.amount}× ${bet.unit} ${bet.drink}`;
+  let drinkResultHtml = "";
+  if (drinkOutcome) {
+    if (drinkOutcome.status === "won" && drinkOutcome.bonus) {
+      drinkResultHtml = `<div class="drink-result bonus">🔥 EXACTE SCORE! Tegenstander drinkt <strong>DUBBEL</strong>: ${drinkOutcome.effective}× ${bet.unit} ${bet.drink} <span class="bonus-badge">×2 bonus</span></div>`;
+    } else if (drinkOutcome.status === "won") {
+      drinkResultHtml = `<div class="drink-result won">✅ Juist getipt! Deel uit: ${drinkText}</div>`;
+    } else {
+      drinkResultHtml = `<div class="drink-result lost">😵 Fout getipt! Jij drinkt: ${drinkText}</div>`;
+    }
+  }
 
   card.innerHTML = `
     <div class="match-meta">
-      <span><span class="group-pill">Groep ${m.group}</span> · ${m.time} · ${m.venue}</span>
-      <span>${ptsLabel}</span>
+      <div class="meta-left">
+        <span class="group-pill">Groep ${m.group}</span>
+        <span class="meta-pill">⏰ ${m.time}</span>
+        <span class="meta-pill">📍 ${m.venue}</span>
+      </div>
+      <div>${ptsLabel}</div>
     </div>
-    <div class="team home">
-      <span class="name">${m.home}</span>
-      <span class="flag">${m.homeFlag}</span>
-    </div>
-    <div class="score-area">
-      <input class="score-input" type="number" min="0" max="20" inputmode="numeric"
-             data-mid="${m.id}" data-side="h" data-kind="pred" value="${pred.h}" />
-      <span class="score-sep">–</span>
-      <input class="score-input" type="number" min="0" max="20" inputmode="numeric"
-             data-mid="${m.id}" data-side="a" data-kind="pred" value="${pred.a}" />
-    </div>
-    <div class="team away">
-      <span class="flag">${m.awayFlag}</span>
-      <span class="name">${m.away}</span>
+
+    <div class="match-body">
+      <div class="team-side">
+        ${flagImg(m.home, m.homeFlag)}
+        <div class="team-name">${m.home}</div>
+      </div>
+
+      <div class="score-box">
+        <div class="score-label tip">Jouw tip</div>
+        <div class="score-row">
+          <input class="score-input" type="number" min="0" max="20" inputmode="numeric"
+                 data-mid="${m.id}" data-side="h" data-kind="pred" value="${pred.h}" placeholder="-" />
+          <span class="score-sep">:</span>
+          <input class="score-input" type="number" min="0" max="20" inputmode="numeric"
+                 data-mid="${m.id}" data-side="a" data-kind="pred" value="${pred.a}" placeholder="-" />
+        </div>
+        ${resultsMode ? `
+          <div class="score-label werkelijk">Werkelijk</div>
+          <div class="score-row actual">
+            <input class="score-input actual" type="number" min="0" max="20" inputmode="numeric"
+                   data-mid="${m.id}" data-side="h" data-kind="actual" value="${act.h}" placeholder="-" />
+            <span class="score-sep" style="color:var(--green-2);">:</span>
+            <input class="score-input actual" type="number" min="0" max="20" inputmode="numeric"
+                   data-mid="${m.id}" data-side="a" data-kind="actual" value="${act.a}" placeholder="-" />
+          </div>
+        ` : (hasActual ? `
+          <div class="score-label werkelijk">Werkelijk</div>
+          <div class="score-row actual">
+            <span style="font-size:1.4rem; font-weight:900; color:var(--green-2); padding:0 10px;">${act.h} : ${act.a}</span>
+          </div>
+        ` : "")}
+      </div>
+
+      <div class="team-side">
+        ${flagImg(m.away, m.awayFlag)}
+        <div class="team-name">${m.away}</div>
+      </div>
     </div>
 
     <div class="drink-row">
       <span class="label-icon">🍺</span>
-      <span>Wint:</span>
+      <span class="drink-label">Wint:</span>
       <div class="drink-segment" data-mid="${m.id}">
-        <button data-pick="h" class="${bet.pick === 'h' ? 'active' : ''}" title="${m.home}">${m.homeFlag}</button>
-        <button data-pick="d" class="${bet.pick === 'd' ? 'active' : ''}">Gelijk</button>
-        <button data-pick="a" class="${bet.pick === 'a' ? 'active' : ''}" title="${m.away}">${m.awayFlag}</button>
+        <button data-pick="h" class="${bet.pick === 'h' ? 'active' : ''}" title="${m.home}">🏠</button>
+        <button data-pick="d" class="${bet.pick === 'd' ? 'active' : ''}">X</button>
+        <button data-pick="a" class="${bet.pick === 'a' ? 'active' : ''}" title="${m.away}">✈️</button>
       </div>
-      <span>Inzet:</span>
+      <span class="drink-label">Inzet:</span>
       <input type="number" min="1" max="20" data-mid="${m.id}" data-bet="amount" value="${bet.amount}" />
       <select data-mid="${m.id}" data-bet="unit">
         ${UNITS.map(u => `<option value="${u}" ${bet.unit === u ? "selected" : ""}>${u}</option>`).join("")}
@@ -1086,28 +1188,11 @@ function renderMatchCard(m) {
       </select>
       ${drinkResultHtml}
     </div>
-
-    ${resultsMode ? `
-      <div class="row-actual">
-        <span class="label">Werkelijke uitslag:</span>
-        <input class="score-input actual" type="number" min="0" max="20" inputmode="numeric"
-               data-mid="${m.id}" data-side="h" data-kind="actual" value="${act.h}" />
-        <span class="score-sep">–</span>
-        <input class="score-input actual" type="number" min="0" max="20" inputmode="numeric"
-               data-mid="${m.id}" data-side="a" data-kind="actual" value="${act.a}" />
-      </div>
-    ` : (act.h !== "" && act.a !== "" ? `
-      <div class="row-actual">
-        <span class="label">Werkelijk: ${act.h} – ${act.a}</span>
-      </div>
-    ` : "")}
   `;
 
   card.querySelectorAll(".score-input").forEach(inp => {
     inp.addEventListener("input", onScoreChange);
   });
-
-  // Drink betting handlers
   card.querySelectorAll(".drink-segment button").forEach(btn => {
     btn.addEventListener("click", onDrinkPickChange);
   });
@@ -1141,16 +1226,8 @@ function onScoreChange(e) {
     renderMatches();
     if (activeView === "standings") renderStandings();
   } else {
-    // refresh just the points pill on this card
-    const card = inp.closest(".match-card");
-    const meta = card.querySelector(".match-meta span:last-child");
-    const pred = predictions[mid] || { h: "", a: "" };
-    const act  = results[mid]     || { h: "", a: "" };
-    const pts  = calcPoints(pred, act);
-    meta.innerHTML = pts === 3 ? `<span class="pts win">🎯 +3 pt</span>`
-                    : pts === 1 ? `<span class="pts partial">✅ +1 pt</span>`
-                    : pts === 0 ? `<span class="pts miss">❌ 0 pt</span>`
-                    : "";
+    // refresh deze card volledig (predictie kan ook de drink-bonus beïnvloeden)
+    refreshCard(mid);
   }
 }
 
@@ -1169,9 +1246,9 @@ function renderStats() {
       if (pts === 3) exact++;
     }
     const bet = drinkBets[m.id];
-    const dr = calcDrinkResult(bet, results[m.id]);
-    if (dr === "won")  drinksWon  += +bet.amount;
-    if (dr === "lost") drinksLost += +bet.amount;
+    const dr = calcDrinkResult(bet, results[m.id], predictions[m.id]);
+    if (dr && dr.status === "won")  drinksWon  += dr.effective;
+    if (dr && dr.status === "lost") drinksLost += dr.effective;
   });
 
   document.getElementById("stat-points").textContent = total;
@@ -1303,13 +1380,13 @@ function renderDrinks() {
 
   MATCHES.forEach(m => {
     const bet = drinkBets[m.id];
-    const dr = calcDrinkResult(bet, results[m.id]);
+    const dr = calcDrinkResult(bet, results[m.id], predictions[m.id]);
     if (!dr) return;
     const key = `${bet.drink} — ${bet.unit}`;
-    const tgt = dr === "won" ? won : lost;
-    tgt[key] = (tgt[key] || 0) + (+bet.amount);
-    if (dr === "won")  totalWon  += +bet.amount;
-    if (dr === "lost") totalLost += +bet.amount;
+    const tgt = dr.status === "won" ? won : lost;
+    tgt[key] = (tgt[key] || 0) + dr.effective;
+    if (dr.status === "won")  totalWon  += dr.effective;
+    if (dr.status === "lost") totalLost += dr.effective;
     detail.push({ m, bet, dr });
   });
 
@@ -1321,13 +1398,14 @@ function renderDrinks() {
 
   root.innerHTML = `
     <div class="help" style="margin-bottom:18px;">
-      🍺 Tip wie er wint per match (klik op een vlag of "Gelijk") en kies hoeveel + welke drank je inzet.
-      Als je tip <strong>juist</strong> is moet je tegenstander drinken. <strong>Fout</strong> = jij drinkt zelf.
+      🍺 Tip wie er wint per match en kies hoeveel + welke drank je inzet.
+      <strong>Juist getipt</strong> → tegenstander drinkt. <strong>Fout</strong> → jij drinkt.
+      <strong>Exacte score juist</strong> → inzet <span style="color:var(--gold);">×2</span>.
     </div>
 
     <div class="drinks-summary">
       <div class="drink-card won">
-        <h3>🍻 Tegenstander drinkt — totaal ${totalWon}</h3>
+        <h3>🍻 Uitgedeeld — totaal ${totalWon}</h3>
         ${renderList(won)}
       </div>
       <div class="drink-card lost">
@@ -1338,15 +1416,19 @@ function renderDrinks() {
 
     ${detail.length ? `
       <div style="margin-top:24px;">
-        <h3 style="color:var(--muted); text-transform:uppercase; font-size:0.85rem; letter-spacing:0.1em;">Per match</h3>
+        <h3 style="color:var(--muted); text-transform:uppercase; font-size:0.85rem; letter-spacing:0.1em; margin-bottom:12px;">Per match</h3>
         ${detail.map(({ m, bet, dr }) => `
-          <div class="match-card" style="grid-template-columns:1fr;">
+          <div class="match-card">
             <div class="match-meta">
-              <span><span class="group-pill">Groep ${m.group}</span> · ${m.homeFlag} ${m.home} – ${m.away} ${m.awayFlag}</span>
-              <span class="${dr === 'won' ? 'pts win' : 'pts miss'}">${dr === 'won' ? '✅ Tegenstander' : '❌ Jij'} drinkt</span>
+              <div class="meta-left">
+                <span class="group-pill">Groep ${m.group}</span>
+                <span class="meta-pill">${m.homeFlag} ${m.home} – ${m.away} ${m.awayFlag}</span>
+              </div>
+              <span class="pts-badge ${dr.status === 'won' ? 'win' : 'miss'}">${dr.status === 'won' ? '✅ Uitgedeeld' : '😵 Drinken'}${dr.bonus ? ' ×2' : ''}</span>
             </div>
-            <div style="text-align:center; font-size:1.05rem; font-weight:600;">
-              ${bet.amount}× ${bet.unit} ${bet.drink}
+            <div style="text-align:center; padding:14px 18px; font-size:1.05rem; font-weight:700;">
+              ${dr.effective}× ${bet.unit} ${bet.drink}
+              ${dr.bonus ? '<span class="bonus-badge">×2 exacte score</span>' : ''}
             </div>
           </div>
         `).join("")}
@@ -1364,12 +1446,12 @@ function renderToDrink() {
 
   MATCHES.forEach(m => {
     const bet = drinkBets[m.id];
-    const dr = calcDrinkResult(bet, results[m.id]);
-    if (dr === "lost") {
-      items.push({ m, bet });
+    const dr = calcDrinkResult(bet, results[m.id], predictions[m.id]);
+    if (dr && dr.status === "lost") {
+      items.push({ m, bet, dr });
       const k = `${bet.drink} — ${bet.unit}`;
-      totals[k] = (totals[k] || 0) + (+bet.amount);
-      grandTotal += +bet.amount;
+      totals[k] = (totals[k] || 0) + dr.effective;
+      grandTotal += dr.effective;
     }
   });
 
@@ -1379,24 +1461,21 @@ function renderToDrink() {
     : `<div class="empty">Nog niets te drinken — proost! 🍻</div>`;
 
   const itemsHtml = items.length
-    ? items.map(({ m, bet }) => {
+    ? items.map(({ m, bet, dr }) => {
         const r = results[m.id];
-        const correct = m.home + " " + m.homeFlag; // dummy, see below
         const winnerName = (+r.h > +r.a) ? `${m.homeFlag} ${m.home}` : (+r.h < +r.a) ? `${m.awayFlag} ${m.away}` : "Gelijkspel";
         const tipName = bet.pick === "h" ? `${m.homeFlag} ${m.home}` : bet.pick === "a" ? `${m.awayFlag} ${m.away}` : "Gelijkspel";
         return `
-          <div class="match-card todrink-card" style="grid-template-columns:1fr;">
-            <div class="match-meta">
-              <span><span class="group-pill">Groep ${m.group}</span> · ${m.homeFlag} ${m.home} <strong>${r.h}–${r.a}</strong> ${m.away} ${m.awayFlag}</span>
-              <span class="pts miss">😵 Drinken</span>
+          <div class="todrink-item">
+            <div class="top">
+              <div class="info">
+                <span class="group-pill" style="margin-right:6px;">Groep ${m.group}</span>
+                ${m.homeFlag} <strong>${m.home}</strong> ${r.h}–${r.a} <strong>${m.away}</strong> ${m.awayFlag}
+              </div>
+              <div class="drink">🥃 ${dr.effective}× ${bet.unit} ${bet.drink}</div>
             </div>
-            <div style="display:flex; flex-wrap:wrap; gap:14px; justify-content:space-between; align-items:center;">
-              <div style="font-size:0.85rem; color:var(--muted);">
-                Jouw tip: <strong style="color:var(--text);">${tipName}</strong> — gewonnen: <strong style="color:var(--good);">${winnerName}</strong>
-              </div>
-              <div style="font-size:1.15rem; font-weight:700; color:var(--danger);">
-                🥃 ${bet.amount}× ${bet.unit} ${bet.drink}
-              </div>
+            <div style="font-size:0.82rem; color:var(--muted);">
+              Jouw tip: <strong style="color:var(--text);">${tipName}</strong> · Gewonnen: <strong style="color:var(--green-2);">${winnerName}</strong>
             </div>
           </div>
         `;
@@ -1404,7 +1483,7 @@ function renderToDrink() {
     : `<div class="help" style="text-align:center;">Geen verloren weddenschappen (yet). Drink met mate, scoor met overmate. 🏆</div>`;
 
   root.innerHTML = `
-    <div class="help" style="margin-bottom:18px; border-color: rgba(230,57,70,0.4); background: linear-gradient(135deg, rgba(230,57,70,0.06), rgba(255,159,28,0.06));">
+    <div class="help" style="margin-bottom:18px; border-color: rgba(230,57,70,0.4); background: linear-gradient(135deg, rgba(230,57,70,0.08), rgba(255,159,28,0.06));">
       🥃 <strong>Hier zie je álles wat jij moet drinken</strong> — samengeteld op basis van afgelopen matchen waar jouw tip fout was. Ad fundum, oeleboele.
     </div>
 
@@ -1413,7 +1492,7 @@ function renderToDrink() {
       ${totalsHtml}
     </div>
 
-    ${items.length ? `<h3 style="color:var(--muted); text-transform:uppercase; font-size:0.85rem; letter-spacing:0.1em; margin:16px 0 8px;">📋 Per match</h3>` : ""}
+    ${items.length ? `<h3 style="color:var(--muted); text-transform:uppercase; font-size:0.85rem; letter-spacing:0.18em; margin:20px 0 12px; font-weight:800;">📋 Per match</h3>` : ""}
     ${itemsHtml}
   `;
 }
