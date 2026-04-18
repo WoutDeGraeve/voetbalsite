@@ -695,19 +695,38 @@
 </head>
 <body>
 
-<header>
-  <h1><span class="ball">⚽</span> <span class="accent">WK 2026</span> Predicties <span class="ball">🏆</span></h1>
-  <p>Groepsfase · 20 t/m 26 juni · alle tijden in Belgische tijd</p>
+<header class="hero">
+  <svg class="hero-trophy" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="trophyGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#ffd23f"/>
+        <stop offset="100%" stop-color="#ff9f1c"/>
+      </linearGradient>
+    </defs>
+    <path d="M20 6h24v6c0 6 0 14-12 18-12-4-12-12-12-18V6Z" fill="url(#trophyGrad)" stroke="#ffb81c" stroke-width="1.5"/>
+    <path d="M20 10h-6c0 6 2 12 8 13" stroke="url(#trophyGrad)" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <path d="M44 10h6c0 6-2 12-8 13" stroke="url(#trophyGrad)" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <rect x="26" y="32" width="12" height="6" rx="1" fill="url(#trophyGrad)"/>
+    <rect x="22" y="38" width="20" height="4" rx="1" fill="#ffb81c"/>
+    <rect x="18" y="42" width="28" height="6" rx="2" fill="url(#trophyGrad)"/>
+    <circle cx="32" cy="14" r="3" fill="#fff" opacity="0.4"/>
+  </svg>
+  <h1>
+    <span class="ball-spin">⚽</span>
+    <span class="gradient">WK 2026</span>
+    <span class="ball-spin">🏆</span>
+  </h1>
+  <p class="subtitle">Groepsfase · <strong>20 t/m 26 juni</strong> · Belgische tijd</p>
   <div class="quote-bar" id="quoteBar">
     <span class="quote-text">
       <span class="quote-author">Albert Einstein:</span>
       "Een wijze man die gokt en drinkt, die kan de wereld aan."
     </span>
     <button id="btnNewQuote" title="Nieuwe wijsheid">🔄</button>
-    <small style="position:absolute; bottom:-18px; left:0; right:0; text-align:center;">
-      ⚠️ Quotes zijn 100% verzonnen — drinken &amp; gokken zijn niet aan te raden, dit is satire 🙃
-    </small>
   </div>
+  <p class="satire-warn">
+    ⚠️ Quotes zijn 100% verzonnen — drinken &amp; gokken zijn niet aan te raden, dit is satire 🙃
+  </p>
 </header>
 
 <div class="stats">
