@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>WK 2026 — Predicties (20–26 juni)</title>
+<style>
+  :root {
+    --bg: #050d1a;              /* nacht-blauw */
+    --bg-2: #0a1628;
+    --card: #0f1f3a;
+    --card-2: #142a4f;
+    --line: #1f3a6b;
+    --text: #f5f9ff;
+    --muted: #8ba3c7;
+    --gold: #ffd23f;
+    --gold-2: #ffb81c;
+    --green: #00b46a;
+    --green-2: #2ee37a;
+    --red: #e63946;
+    --red-2: #ff5d6c;
+    --pink: #ff3d8b;
+    --purple: #8b5cf6;
+    --orange: #ff9f1c;
+    --warn: #ff9f1c;
+    --danger: #e63946;
+    --good: #2ee37a;
+    --accent: #ffd23f;
+    --accent-2: #00b46a;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: var(--text);
+    min-height: 100vh;
+    background:
+      radial-gradient(1100px 700px at 90% -20%, rgba(255, 210, 63, 0.18) 0%, transparent 55%),
+      radial-gradient(1100px 700px at -10% 30%, rgba(0, 180, 106, 0.18) 0%, transparent 55%),
+      radial-gradient(900px 600px at 20% 110%, rgba(139, 92, 246, 0.14) 0%, transparent 55%),
+      radial-gradient(900px 600px at 80% 90%, rgba(230, 57, 70, 0.10) 0%, transparent 55%),
+      var(--bg);
+    overflow-x: hidden;
+  }
+  body::before {
+    content: "";
+    position: fixed; inset: 0;
+    background:
+      repeating-linear-gradient(
+        90deg,
+        rgba(255,255,255,0.012) 0 2px,
+        transparent 2px 60px
+      );
+    pointer-events: none;
+    z-index: 0;
+  }
+  body > * { position: relative; z-index: 1; }
+
+  /* ===== HERO ===== */
+  .hero {
+    position: relative;
+    padding: 36px 20px 30px;
+    text-align: center;
+    overflow: hidden;
+  }
+  .hero-trophy {
+    width: 80px; height: 80px;
+    margin: 0 auto 8px;
+    filter: drop-shadow(0 0 20px rgba(255,210,63,0.5));
+    animation: float 4s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  .hero h1 {
+    margin: 0;
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    text-transform: uppercase;
+  }
+  .hero h1 .gradient {
+    background: linear-gradient(90deg, #ffd23f 0%, #ff9f1c 30%, #ff3d8b 60%, #8b5cf6 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 0 30px rgba(255,210,63,0.4));
+  }
+  .hero .ball-spin {
+    display: inline-block;
+    animation: spin 4s linear infinite;
+    transform-origin: center;
+  }
+  @keyframes spin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+  .hero .subtitle {
+    color: var(--muted);
+    margin: 8px 0 0;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-weight: 600;
+  }
+  .hero .subtitle strong { color: var(--gold); }
+
+  .quote-bar {
+    max-width: 760px;
+    margin: 22px auto 0;
+    padding: 16px 22px 18px;
+    background:
+      linear-gradient(135deg, rgba(255, 210, 63, 0.13), rgba(139, 92, 246, 0.10)),
+      rgba(15, 31, 58, 0.7);
+    border: 1px solid rgba(255, 210, 63, 0.4);
+    border-radius: 18px;
+    font-style: italic;
+    font-size: 1rem;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    line-height: 1.45;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  }
+  .quote-bar .quote-text { flex: 1; text-align: center; }
+  .quote-bar .quote-author {
+    color: var(--gold);
+    font-style: normal;
+    font-weight: 800;
+    margin-right: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.85rem;
+  }
+  .quote-bar button {
+    background: transparent;
+    border: 1px solid rgba(255, 210, 63, 0.5);
+    color: var(--gold);
+    border-radius: 10px;
+    padding: 6px 10px;
+    cursor: pointer;
+    font-size: 1.05rem;
+    transition: transform 0.4s, background 0.15s;
+    flex-shrink: 0;
+  }
+  .quote-bar button:hover { transform: rotate(180deg); background: rgba(255,210,63,0.15); }
+  .satire-warn {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.72rem;
+    margin: 6px auto 0;
+    max-width: 760px;
+    opacity: 0.7;
+  }
+
+  /* ===== STATS ===== */
+  .stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    padding: 18px 16px 4px;
+  }
+  .stat {
+    background: linear-gradient(135deg, var(--card), var(--card-2));
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 14px 18px;
+    min-width: 140px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.15s;
+  }
+  .stat:hover { transform: translateY(-3px); }
+  .stat::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent 60%, currentColor 200%);
+    opacity: 0.05;
+    pointer-events: none;
+  }
+  .stat .label { color: var(--muted); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; }
+  .stat .value { font-size: 1.7rem; font-weight: 900; margin-top: 4px; line-height: 1; }
+  .stat.gold .value { color: var(--gold); }
+  .stat.green .value { color: var(--green-2); }
+  .stat.red .value { color: var(--red-2); }
+  .stat.purple .value { color: var(--purple); }
+
+  /* ===== TOOLBAR ===== */
+  .toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    padding: 16px 16px 6px;
+  }
+  .toolbar button, .toolbar select {
+    background: rgba(15, 31, 58, 0.7);
+    color: var(--text);
+    border: 1px solid var(--line);
+    padding: 9px 16px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.15s;
+    backdrop-filter: blur(6px);
+  }
+  .toolbar button:hover { background: var(--card-2); border-color: var(--gold); transform: translateY(-1px); }
+  .toolbar button:active { transform: scale(0.98); }
+  .toolbar button.danger { color: var(--red-2); border-color: rgba(230,57,70,0.5); }
+  .toolbar button.danger:hover { background: rgba(230,57,70,0.1); border-color: var(--red); }
+  .toolbar button.primary {
+    background: linear-gradient(135deg, var(--gold), var(--orange));
+    border: none; color: #0b1220; font-weight: 800;
+  }
+
+  /* ===== TABS ===== */
+  nav.tabs {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 14px 16px 6px;
+    justify-content: center;
+    scrollbar-width: none;
+  }
+  nav.tabs::-webkit-scrollbar { display: none; }
+  nav.tabs button {
+    background: rgba(15, 31, 58, 0.6);
+    color: var(--muted);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 9px 18px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    white-space: nowrap;
+    font-weight: 600;
+    transition: all 0.15s;
+    backdrop-filter: blur(6px);
+  }
+  nav.tabs button:hover { color: var(--text); border-color: var(--gold); transform: translateY(-1px); }
+  nav.tabs button.active {
+    background: linear-gradient(135deg, var(--gold), var(--orange));
+    color: #0b1220;
+    border-color: transparent;
+    font-weight: 800;
+    box-shadow: 0 4px 16px rgba(255, 210, 63, 0.3);
+  }
+
+  /* ===== MAIN ===== */
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 16px;
+  }
+  .view-section { display: none; }
+  .view-section.active { display: block; animation: fadeIn 0.25s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ===== DAY HEADERS ===== */
+  .day-block { margin-bottom: 32px; }
+  .day-title {
+    font-size: 0.85rem;
+    color: var(--gold);
+    margin: 8px 0 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .day-title::before, .day-title::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--line), transparent);
+  }
+
+  /* ===== MATCH CARD (gloednieuw design) ===== */
+  .match-card {
+    background:
+      linear-gradient(135deg, rgba(255,255,255,0.02), transparent 50%),
+      linear-gradient(180deg, var(--card) 0%, var(--card-2) 100%);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 0;
+    margin-bottom: 16px;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  }
+  .match-card:hover {
+    border-color: var(--gold);
+    box-shadow: 0 8px 32px rgba(255,210,63,0.12);
+    transform: translateY(-2px);
+  }
+
+  /* Top meta strip */
+  .match-meta {
+    display: flex;
+    gap: 8px;
+    padding: 10px 18px;
+    background: rgba(0,0,0,0.25);
+    border-bottom: 1px solid var(--line);
+    font-size: 0.78rem;
+    color: var(--muted);
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .match-meta .meta-left { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; flex: 1; }
+  .group-pill {
+    background: linear-gradient(135deg, var(--gold), var(--orange));
+    color: #0b1220;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-weight: 800;
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+  }
+  .meta-pill {
+    background: rgba(15,31,58,0.6);
+    border: 1px solid var(--line);
+    padding: 3px 9px;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 600;
+  }
+
+  /* Teams + score */
+  .match-body {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 16px;
+    padding: 22px 18px;
+    align-items: center;
+    position: relative;
+  }
+  .team-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+  }
+  .team-flag-img {
+    width: 72px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.1);
+    transition: transform 0.2s;
+  }
+  .team-flag-img:hover { transform: scale(1.08); }
+  .team-flag-img.fallback { background: var(--card-2); display: flex; align-items: center; justify-content: center; font-size: 1.8rem; }
+  .team-name {
+    font-weight: 800;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    text-align: center;
+    line-height: 1.2;
+    color: var(--text);
+  }
+
+  .score-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 6px;
+  }
+  .score-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background:
+      linear-gradient(135deg, rgba(255,210,63,0.06), rgba(139,92,246,0.04)),
+      rgba(0,0,0,0.3);
+    padding: 8px 14px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,210,63,0.2);
+  }
+  .score-row.actual { border-color: rgba(46,227,122,0.4); background: linear-gradient(135deg, rgba(46,227,122,0.1), rgba(0,180,106,0.05)); }
+  .score-input {
+    width: 44px;
+    height: 48px;
+    text-align: center;
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    font-size: 1.4rem;
+    font-weight: 900;
+    -moz-appearance: textfield;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .score-input::-webkit-inner-spin-button,
+  .score-input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+  .score-input:focus { outline: none; border-color: var(--gold); background: rgba(255,210,63,0.08); }
+  .score-input.actual:focus { border-color: var(--green-2); background: rgba(46,227,122,0.08); }
+  .score-sep { color: var(--gold); font-weight: 900; font-size: 1.2rem; }
+
+  .score-label {
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .score-label.tip { color: var(--gold); }
+  .score-label.werkelijk { color: var(--green-2); }
+
+  .pts-badge {
+    background: rgba(0,0,0,0.3);
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-weight: 800;
+    font-size: 0.78rem;
+  }
+  .pts-badge.win { color: var(--green-2); border: 1px solid rgba(46,227,122,0.4); }
+  .pts-badge.partial { color: var(--orange); border: 1px solid rgba(255,159,28,0.4); }
+  .pts-badge.miss { color: var(--red-2); border: 1px solid rgba(230,57,70,0.4); }
+
+  /* ===== DRINKSPEL ROW ===== */
+  .drink-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 18px;
+    background:
+      linear-gradient(135deg, rgba(255,159,28,0.08), rgba(230,57,70,0.06)),
+      rgba(0,0,0,0.2);
+    border-top: 1px solid rgba(255,159,28,0.2);
+    font-size: 0.88rem;
+  }
+  .drink-row .label-icon {
+    font-size: 1.3rem;
+  }
+  .drink-row > .drink-label {
+    font-weight: 700;
+    color: var(--orange);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.78rem;
+  }
+  .drink-row select, .drink-row input[type="number"] {
+    background: rgba(0,0,0,0.4);
+    color: var(--text);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 0.9rem;
+    font-family: inherit;
+    font-weight: 600;
+  }
+  .drink-row input[type="number"] {
+    width: 56px;
+    text-align: center;
+    font-weight: 800;
+    -moz-appearance: textfield;
+  }
+  .drink-row input[type="number"]::-webkit-inner-spin-button,
+  .drink-row input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+  .drink-row select:focus, .drink-row input:focus { outline: none; border-color: var(--orange); }
+
+  .drink-segment {
+    display: inline-flex;
+    background: rgba(0,0,0,0.4);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 2px;
+    gap: 2px;
+  }
+  .drink-segment button {
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 700;
+    border-radius: 8px;
+    transition: all 0.15s;
+    min-width: 36px;
+  }
+  .drink-segment button.active {
+    background: linear-gradient(135deg, var(--orange), var(--gold));
+    color: #0b1220;
+    box-shadow: 0 2px 8px rgba(255,159,28,0.35);
+  }
+  .drink-segment button:not(.active):hover { background: var(--card-2); color: var(--text); }
+
+  .drink-result {
+    flex-basis: 100%;
+    margin-top: 6px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-weight: 700;
+    text-align: center;
+    font-size: 0.95rem;
+  }
+  .drink-result.won {
+    background: linear-gradient(135deg, rgba(46,227,122,0.15), rgba(0,180,106,0.1));
+    border: 1px solid rgba(46,227,122,0.4);
+    color: var(--green-2);
+  }
+  .drink-result.lost {
+    background: linear-gradient(135deg, rgba(230,57,70,0.15), rgba(255,93,108,0.1));
+    border: 1px solid rgba(230,57,70,0.4);
+    color: var(--red-2);
+  }
+  .drink-result.bonus {
+    background: linear-gradient(135deg, rgba(255,210,63,0.18), rgba(255,159,28,0.12));
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    animation: shimmer 2s ease-in-out infinite;
+  }
+  @keyframes shimmer {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255,210,63,0); }
+    50% { box-shadow: 0 0 20px 0 rgba(255,210,63,0.4); }
+  }
+  .bonus-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--gold), var(--orange));
+    color: #0b1220;
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    margin-left: 8px;
+    text-transform: uppercase;
+  }
+
+  /* ===== STANDINGS ===== */
+  table.standings {
+    width: 100%;
+    border-collapse: collapse;
+    background: linear-gradient(135deg, var(--card), var(--card-2));
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+  table.standings th, table.standings td {
+    padding: 10px 12px;
+    text-align: center;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.9rem;
+  }
+  table.standings th {
+    background: rgba(0,0,0,0.3);
+    color: var(--gold);
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+  }
+  table.standings td.team-col { text-align: left; font-weight: 700; }
+  table.standings td.team-col img { width: 24px; height: 16px; vertical-align: middle; margin-right: 8px; border-radius: 2px; }
+  table.standings tr:last-child td { border-bottom: none; }
+  table.standings tr.qualify td { background: rgba(46,227,122,0.07); }
+  table.standings tr.qualify td.team-col { color: var(--green-2); }
+
+  .group-section h3 {
+    margin: 18px 0 8px;
+    color: var(--gold);
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.18em;
+    font-weight: 800;
+  }
+
+  /* ===== DRINK CARDS (overzicht) ===== */
+  .drinks-summary { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  @media (max-width: 700px) { .drinks-summary { grid-template-columns: 1fr; } }
+  .drink-card {
+    background: linear-gradient(135deg, var(--card), var(--card-2));
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 20px 22px;
+  }
+  .drink-card h3 { margin: 0 0 14px; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 800; }
+  .drink-card.won { border-color: rgba(46,227,122,0.5); }
+  .drink-card.won h3 { color: var(--green-2); }
+  .drink-card.lost { border-color: rgba(230,57,70,0.5); }
+  .drink-card.lost h3 { color: var(--red-2); }
+  .drink-card ul { list-style: none; padding: 0; margin: 0; }
+  .drink-card li { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
+  .drink-card li:last-child { border-bottom: none; }
+  .drink-card li .amt { font-weight: 800; font-size: 1.05rem; }
+  .drink-card.won li .amt { color: var(--green-2); }
+  .drink-card.lost li .amt { color: var(--red-2); }
+  .drink-card .empty { color: var(--muted); font-style: italic; padding: 8px 0; text-align: center; }
+
+  .stat.green { border-color: rgba(46,227,122,0.4); }
+  .stat.red { border-color: rgba(230,57,70,0.4); }
+
+  /* ===== MODAL ===== */
+  .modal {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.7);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    padding: 16px;
+    backdrop-filter: blur(4px);
+  }
+  .modal.open { display: flex; animation: fadeIn 0.2s; }
+  .modal-box {
+    background: linear-gradient(135deg, var(--card), var(--card-2));
+    border: 1px solid var(--gold);
+    border-radius: 18px;
+    padding: 28px;
+    max-width: 480px;
+    width: 100%;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+  .modal-box h2 { margin-top: 0; color: var(--gold); }
+  .modal-box p { color: var(--muted); line-height: 1.5; }
+  .modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 18px; }
+
+  /* ===== HELP CARD ===== */
+  .help {
+    background: linear-gradient(135deg, var(--card), var(--card-2));
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 20px 24px;
+    color: var(--muted);
+    line-height: 1.55;
+    font-size: 0.92rem;
+  }
+  .help strong { color: var(--text); }
+  .help code { background: rgba(0,0,0,0.4); padding: 2px 6px; border-radius: 4px; color: var(--gold); }
+
+  /* ===== TODRINK CARDS ===== */
+  .todrink-item {
+    background: linear-gradient(135deg, rgba(230,57,70,0.06), rgba(255,93,108,0.03)), var(--card);
+    border: 1px solid rgba(230,57,70,0.3);
+    border-left: 4px solid var(--red);
+    border-radius: 14px;
+    padding: 14px 18px;
+    margin-bottom: 12px;
+  }
+  .todrink-item .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .todrink-item .top .info { color: var(--muted); font-size: 0.85rem; }
+  .todrink-item .top .info strong { color: var(--text); }
+  .todrink-item .drink {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--red-2);
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.78rem;
+    padding: 28px 16px 36px;
+  }
+  footer .stadium {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto 16px;
+    opacity: 0.4;
+  }
+
+  @media (max-width: 600px) {
+    .team-flag-img { width: 56px; height: 38px; }
+    .team-name { font-size: 0.85rem; }
+    .score-input { width: 38px; height: 42px; font-size: 1.15rem; }
+    .match-body { padding: 18px 12px; gap: 8px; }
+    .stat { min-width: 110px; padding: 10px 14px; }
+    .stat .value { font-size: 1.3rem; }
+    .drink-row { padding: 12px; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1><span class="ball">⚽</span> <span class="accent">WK 2026</span> Predicties <span class="ball">🏆</span></h1>
+  <p>Groepsfase · 20 t/m 26 juni · alle tijden in Belgische tijd</p>
+  <div class="quote-bar" id="quoteBar">
+    <span class="quote-text">
+      <span class="quote-author">Albert Einstein:</span>
+      "Een wijze man die gokt en drinkt, die kan de wereld aan."
+    </span>
+    <button id="btnNewQuote" title="Nieuwe wijsheid">🔄</button>
+    <small style="position:absolute; bottom:-18px; left:0; right:0; text-align:center;">
+      ⚠️ Quotes zijn 100% verzonnen — drinken &amp; gokken zijn niet aan te raden, dit is satire 🙃
+    </small>
+  </div>
+</header>
+
+<div class="stats">
+  <div class="stat"><div class="label">Jouw punten</div><div class="value" id="stat-points">0</div></div>
+  <div class="stat"><div class="label">Voorspeld</div><div class="value" id="stat-predicted">0 / 0</div></div>
+  <div class="stat"><div class="label">Volle treffers</div><div class="value" id="stat-exact">0</div></div>
+  <div class="stat drink-won"><div class="label">🍻 Gewonnen</div><div class="value" id="stat-drinks-won">0</div></div>
+  <div class="stat drink-lost"><div class="label">😵 Te drinken</div><div class="value" id="stat-drinks-lost">0</div></div>
+</div>
+
+<div class="toolbar">
+  <button id="toggleResults">📥 Resultaten invullen: <span id="resultsState">UIT</span></button>
+  <button id="btnHelp">❓ Uitleg</button>
+  <button id="btnExport">⬇️ Export</button>
+  <button id="btnImport">⬆️ Import</button>
+  <button id="btnReset" class="danger">🗑️ Reset alles</button>
+</div>
+
+<nav class="tabs" id="tabs">
+  <button data-view="matches" data-day="all" class="active">Alle matchen</button>
+  <button data-view="matches" data-day="2026-06-20">Za 20 juni</button>
+  <button data-view="matches" data-day="2026-06-21">Zo 21 juni</button>
+  <button data-view="matches" data-day="2026-06-22">Ma 22 juni</button>
+  <button data-view="matches" data-day="2026-06-23">Di 23 juni</button>
+  <button data-view="matches" data-day="2026-06-24">Wo 24 juni</button>
+  <button data-view="matches" data-day="2026-06-25">Do 25 juni</button>
+  <button data-view="matches" data-day="2026-06-26">Vr 26 juni</button>
+  <button data-view="standings">📊 Groepsstanden</button>
+  <button data-view="drinks">🍺 Drankoverzicht</button>
+  <button data-view="todrink">🥃 Wat moet ik drinken?</button>
+</nav>
+
+<main>
+  <section id="view-matches" class="view-section active"></section>
+  <section id="view-standings" class="view-section"></section>
+  <section id="view-drinks" class="view-section"></section>
+  <section id="view-todrink" class="view-section"></section>
+</main>
+
+<div class="modal" id="helpModal">
+  <div class="modal-box">
+    <h2>Hoe werkt het?</h2>
+    <p>
+      <strong>Predicties:</strong> vul links de score in die jij voorspelt voor elke match. Je predicties worden automatisch bewaard in je browser.
+    </p>
+    <p>
+      <strong>Resultaten:</strong> klik op "Resultaten invullen" en voeg de écht gespeelde score toe als de match afgelopen is.
+    </p>
+    <p>
+      <strong>Punten:</strong><br>
+      🎯 <strong>3 punten</strong> — exacte score juist<br>
+      ✅ <strong>1 punt</strong> — juiste winnaar / gelijkspel<br>
+      ❌ <strong>0 punten</strong> — fout
+    </p>
+    <p>
+      <strong>Groepsstanden</strong> bewegen mee met de werkelijke uitslagen die je invult.
+    </p>
+    <p>
+      <strong>🍺 Drankspel:</strong> kies per match wie je denkt dat wint (Thuis · Gelijk · Uit) en zet er drank op in (atje, shotje, pintje of glas).<br>
+      ✅ <strong>Juist getipt</strong> → tegenstander drinkt<br>
+      ❌ <strong>Fout getipt</strong> → jij drinkt<br>
+      Het totaaloverzicht vind je in de tab "🍺 Drankoverzicht".
+    </p>
+    <p style="font-size:0.85rem; opacity:0.7;">
+      Alles wordt opgeslagen in je browser (localStorage). Cache wissen = data weg. Gebruik Export om een back-up te maken.
+    </p>
+    <div class="modal-actions">
+      <button class="primary" onclick="closeModal('helpModal')">Begrepen</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="exportModal">
+  <div class="modal-box">
+    <h2>Exporteren</h2>
+    <p>Vul je naam in zodat het bestand herkenbaar is.</p>
+    <input type="text" id="exportName" placeholder="Bv. Wout"
+           style="width:100%; padding:10px 12px; background:var(--bg-2); color:var(--text);
+                  border:1px solid var(--line); border-radius:8px; font-size:1rem; font-family:inherit;" />
+    <p style="font-size:0.8rem; opacity:0.7; margin-top:8px;">
+      Bestandsnaam wordt: <code id="exportPreview" style="background:var(--bg-2); padding:2px 6px; border-radius:4px; color:var(--accent);">WK2026-naam-2026-04-18.json</code>
+    </p>
+    <div class="modal-actions">
+      <button onclick="closeModal('exportModal')">Annuleer</button>
+      <button class="primary" id="btnExportConfirm">⬇️ Download</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="resetModal">
+  <div class="modal-box">
+    <h2>Alles resetten?</h2>
+    <p>Dit wist al je predicties én ingevulde resultaten. Niet ongedaan te maken (tenzij je een export hebt).</p>
+    <div class="modal-actions">
+      <button onclick="closeModal('resetModal')">Annuleer</button>
+      <button class="danger" onclick="doReset()">Ja, wis alles</button>
+    </div>
+  </div>
+</div>
+
+<input type="file" id="importFile" accept=".json" style="display:none" />
+
+<footer>
+  <p>WK 2026 (Canada · Mexico · USA) — Schema groepsfase 20–26 juni · Schema kan wijzigen — controleer steeds via fifa.com.</p>
+</footer>
+
+<script>
+/* ====================== DATA ====================== */
+
+// Tijden in Belgische zomertijd (CEST). Gebaseerd op Sky Sports / FIFA schema.
+// "date" = Belgische datum waarop de wedstrijd start.
+const MATCHES = [
+  // Zaterdag 20 juni
+  { id: "m1",  date: "2026-06-20", time: "02:30", group: "C", home: "Brazilië",      homeFlag: "🇧🇷", away: "Haïti",         awayFlag: "🇭🇹", venue: "Lincoln Financial Field, Philadelphia" },
+  { id: "m2",  date: "2026-06-20", time: "05:00", group: "D", home: "Turkije",       homeFlag: "🇹🇷", away: "Paraguay",      awayFlag: "🇵🇾", venue: "Levi's Stadium, Santa Clara" },
+  { id: "m3",  date: "2026-06-20", time: "19:00", group: "A", home: "Nederland",     homeFlag: "🇳🇱", away: "Zweden",        awayFlag: "🇸🇪", venue: "NRG Stadium, Houston" },
+  { id: "m4",  date: "2026-06-20", time: "22:00", group: "E", home: "Duitsland",     homeFlag: "🇩🇪", away: "Ivoorkust",     awayFlag: "🇨🇮", venue: "BMO Field, Toronto" },
+
+  // Zondag 21 juni
+  { id: "m5",  date: "2026-06-21", time: "02:00", group: "E", home: "Ecuador",       homeFlag: "🇪🇨", away: "Curaçao",       awayFlag: "🇨🇼", venue: "Arrowhead Stadium, Kansas City" },
+  { id: "m6",  date: "2026-06-21", time: "06:00", group: "F", home: "Tunesië",       homeFlag: "🇹🇳", away: "Japan",         awayFlag: "🇯🇵", venue: "Estadio Akron, Guadalajara" },
+  { id: "m7",  date: "2026-06-21", time: "18:00", group: "H", home: "Spanje",        homeFlag: "🇪🇸", away: "Saoedi-Arabië", awayFlag: "🇸🇦", venue: "Mercedes-Benz Stadium, Atlanta" },
+  { id: "m8",  date: "2026-06-21", time: "21:00", group: "G", home: "België",        homeFlag: "🇧🇪", away: "Iran",          awayFlag: "🇮🇷", venue: "SoFi Stadium, Los Angeles" },
+
+  // Maandag 22 juni
+  { id: "m9",  date: "2026-06-22", time: "00:00", group: "H", home: "Uruguay",       homeFlag: "🇺🇾", away: "Kaapverdië",    awayFlag: "🇨🇻", venue: "Hard Rock Stadium, Miami" },
+  { id: "m10", date: "2026-06-22", time: "03:00", group: "G", home: "Nieuw-Zeeland", homeFlag: "🇳🇿", away: "Egypte",        awayFlag: "🇪🇬", venue: "BC Place, Vancouver" },
+  { id: "m11", date: "2026-06-22", time: "19:00", group: "J", home: "Argentinië",    homeFlag: "🇦🇷", away: "Oostenrijk",    awayFlag: "🇦🇹", venue: "AT&T Stadium, Arlington" },
+  { id: "m12", date: "2026-06-22", time: "23:00", group: "I", home: "Frankrijk",     homeFlag: "🇫🇷", away: "Irak",          awayFlag: "🇮🇶", venue: "Lincoln Financial Field, Philadelphia" },
+
+  // Dinsdag 23 juni
+  { id: "m13", date: "2026-06-23", time: "02:00", group: "I", home: "Noorwegen",     homeFlag: "🇳🇴", away: "Senegal",       awayFlag: "🇸🇳", venue: "BMO Field, Toronto" },
+  { id: "m14", date: "2026-06-23", time: "05:00", group: "J", home: "Jordanië",      homeFlag: "🇯🇴", away: "Algerije",      awayFlag: "🇩🇿", venue: "Levi's Stadium, Santa Clara" },
+  { id: "m15", date: "2026-06-23", time: "19:00", group: "K", home: "Portugal",      homeFlag: "🇵🇹", away: "Oezbekistan",   awayFlag: "🇺🇿", venue: "NRG Stadium, Houston" },
+  { id: "m16", date: "2026-06-23", time: "22:00", group: "L", home: "Engeland",      homeFlag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", away: "Ghana",         awayFlag: "🇬🇭", venue: "Gillette Stadium, Foxborough" },
+
+  // Woensdag 24 juni
+  { id: "m17", date: "2026-06-24", time: "01:00", group: "L", home: "Panama",        homeFlag: "🇵🇦", away: "Kroatië",       awayFlag: "🇭🇷", venue: "Gillette Stadium, Foxborough" },
+  { id: "m18", date: "2026-06-24", time: "04:00", group: "K", home: "Colombia",      homeFlag: "🇨🇴", away: "DR Congo",      awayFlag: "🇨🇩", venue: "Estadio Akron, Zapopan" },
+  { id: "m19", date: "2026-06-24", time: "21:00", group: "B", home: "Zwitserland",   homeFlag: "🇨🇭", away: "Canada",        awayFlag: "🇨🇦", venue: "BC Place, Vancouver" },
+  { id: "m20", date: "2026-06-24", time: "21:00", group: "B", home: "Bosnië-Herz.",  homeFlag: "🇧🇦", away: "Qatar",         awayFlag: "🇶🇦", venue: "Lumen Field, Seattle" },
+
+  // Donderdag 25 juni
+  { id: "m21", date: "2026-06-25", time: "00:00", group: "C", home: "Marokko",       homeFlag: "🇲🇦", away: "Haïti",         awayFlag: "🇭🇹", venue: "Mercedes-Benz Stadium, Atlanta" },
+  { id: "m22", date: "2026-06-25", time: "00:00", group: "C", home: "Schotland",     homeFlag: "🏴󠁧󠁢󠁳󠁣󠁴󠁿", away: "Brazilië",      awayFlag: "🇧🇷", venue: "Hard Rock Stadium, Miami" },
+  { id: "m23", date: "2026-06-25", time: "22:00", group: "E", home: "Ecuador",       homeFlag: "🇪🇨", away: "Duitsland",     awayFlag: "🇩🇪", venue: "MetLife Stadium, East Rutherford" },
+  { id: "m24", date: "2026-06-25", time: "22:00", group: "E", home: "Curaçao",       homeFlag: "🇨🇼", away: "Ivoorkust",     awayFlag: "🇨🇮", venue: "Lincoln Financial Field, Philadelphia" },
+
+  // Vrijdag 26 juni
+  { id: "m25", date: "2026-06-26", time: "01:00", group: "F", home: "Tunesië",       homeFlag: "🇹🇳", away: "Nederland",     awayFlag: "🇳🇱", venue: "Arrowhead Stadium, Kansas City" },
+  { id: "m26", date: "2026-06-26", time: "01:00", group: "F", home: "Japan",         homeFlag: "🇯🇵", away: "Zweden",        awayFlag: "🇸🇪", venue: "AT&T Stadium, Arlington" },
+  { id: "m27", date: "2026-06-26", time: "04:00", group: "D", home: "Turkije",       homeFlag: "🇹🇷", away: "USA",           awayFlag: "🇺🇸", venue: "SoFi Stadium, Los Angeles" },
+  { id: "m28", date: "2026-06-26", time: "04:00", group: "D", home: "Paraguay",      homeFlag: "🇵🇾", away: "Australië",     awayFlag: "🇦🇺", venue: "Levi's Stadium, Santa Clara" },
+  { id: "m29", date: "2026-06-26", time: "21:00", group: "I", home: "Noorwegen",     homeFlag: "🇳🇴", away: "Frankrijk",     awayFlag: "🇫🇷", venue: "Gillette Stadium, Foxborough" },
+  { id: "m30", date: "2026-06-26", time: "21:00", group: "I", home: "Senegal",       homeFlag: "🇸🇳", away: "Irak",          awayFlag: "🇮🇶", venue: "BMO Field, Toronto" }
+];
+
+const DRINKS = [
+  "Bier", "Pintje", "Jägermeister", "Jägerbomb", "Rum", "Bacardi",
+  "Vodka", "Vodka Red Bull", "Limoncello", "Tequila", "Whisky", "Wijn", "Cava"
+];
+const UNITS = ["Atje", "Shotje"];
+
+const QUOTES = [
+  { author: "Albert Einstein",     text: "Een wijze man die gokt en drinkt, die kan de wereld aan." },
+  { author: "Mark Twain",          text: "Stoppen met drinken is makkelijk, ik heb het al duizend keer gedaan." },
+  { author: "Confucius",           text: "Wie veel inzet en weinig drinkt, mist de helft van het feest." },
+  { author: "Napoleon Bonaparte",  text: "Een veldslag wint men met paarden. Een feestje met jägermeister." },
+  { author: "Socrates",            text: "Ik weet één ding zeker: na drie jägerbombs weet ik niets meer." },
+  { author: "Winston Churchill",   text: "Ik heb meer aan de bar geleerd dan op het slagveld." },
+  { author: "Johan Cruijff",       text: "Voetbal is simpel — gokken erop maakt het ingewikkeld." },
+  { author: "Louis van Gaal",      text: "Het is altijd de schuld van de jäger. Altijd." },
+  { author: "Diego Maradona",      text: "God speelt mee, maar Hij betaalt de ronde nooit." },
+  { author: "Lionel Messi",        text: "Talent wint matches, drank wint feesten." },
+  { author: "Frank Sinatra",       text: "Gokken zonder drinken is als voetbal zonder bal." },
+  { author: "Pep Guardiola",       text: "Tiki-taka op het veld, jaka-jaka aan de toog." },
+  { author: "Cristiano Ronaldo",   text: "Suuuuuu… nog één shotje." },
+  { author: "Oscar Wilde",         text: "Ik kan elke verleiding weerstaan, behalve die van een atje na een goal." },
+  { author: "Plato",               text: "De ideale wereld bestaat — ergens tussen het derde en het vierde shotje in." },
+  { author: "Lady Luck",           text: "Ik blijf alleen zolang er bier in het glas zit." },
+  { author: "Anonieme Belg",       text: "Een Belg gokt niet — hij maakt voorspellingen met overtuiging." },
+  { author: "De Bondscoach",       text: "We hadden de match wél gewonnen als ik op tijd had ingezet." },
+  { author: "Friedrich Nietzsche", text: "Wat je niet doodt, drink je gewoon weg." },
+  { author: "Voltaire",            text: "Het beste argument tegen gokken? Een jägerbomb. Het wint altijd." }
+];
+
+const DAY_LABELS = {
+  "2026-06-20": "Zaterdag 20 juni",
+  "2026-06-21": "Zondag 21 juni",
+  "2026-06-22": "Maandag 22 juni",
+  "2026-06-23": "Dinsdag 23 juni",
+  "2026-06-24": "Woensdag 24 juni",
+  "2026-06-25": "Donderdag 25 juni",
+  "2026-06-26": "Vrijdag 26 juni"
+};
+
+/* ====================== STATE ====================== */
+const STORAGE_KEY = "wk2026_predictions_v1";
+const RESULTS_KEY = "wk2026_results_v1";
+const MODE_KEY    = "wk2026_resultmode_v1";
+const DRINKS_KEY  = "wk2026_drinkbets_v1";
+const NAME_KEY    = "wk2026_username_v1";
+
+let predictions = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+let results     = JSON.parse(localStorage.getItem(RESULTS_KEY) || "{}");
+let drinkBets   = JSON.parse(localStorage.getItem(DRINKS_KEY) || "{}");
+let resultsMode = localStorage.getItem(MODE_KEY) === "1";
+let userName    = localStorage.getItem(NAME_KEY) || "";
+let activeDay   = "all";
+let activeView  = "matches";
+
+function save() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(predictions));
+  localStorage.setItem(RESULTS_KEY, JSON.stringify(results));
+  localStorage.setItem(DRINKS_KEY, JSON.stringify(drinkBets));
+  localStorage.setItem(MODE_KEY, resultsMode ? "1" : "0");
+  if (userName) localStorage.setItem(NAME_KEY, userName);
+}
+
+// Migreer oude bets: alles wat geen Atje/Shotje is → Shotje
+Object.keys(drinkBets).forEach(k => {
+  if (drinkBets[k] && !UNITS.includes(drinkBets[k].unit)) {
+    drinkBets[k].unit = "Shotje";
+  }
+});
+
+/* ====================== POINTS ====================== */
+function calcPoints(pred, actual) {
+  if (!pred || !actual) return null;
+  if (pred.h === "" || pred.a === "" || actual.h === "" || actual.a === "") return null;
+  const ph = +pred.h, pa = +pred.a, ah = +actual.h, aa = +actual.a;
+  if (ph === ah && pa === aa) return 3;
+  const predOutcome = Math.sign(ph - pa);
+  const actOutcome  = Math.sign(ah - aa);
+  if (predOutcome === actOutcome) return 1;
+  return 0;
+}
+
+/* ====================== DRANK ====================== */
+// pick: "h" (thuis), "d" (gelijk), "a" (uit)
+function calcDrinkResult(bet, actual) {
+  if (!bet || !bet.pick || !bet.amount || !actual) return null;
+  if (actual.h === "" || actual.a === "") return null;
+  const ah = +actual.h, aa = +actual.a;
+  const actOutcome = ah > aa ? "h" : (ah < aa ? "a" : "d");
+  return bet.pick === actOutcome ? "won" : "lost";
+}
+
+/* ====================== RENDER ====================== */
+function render() {
+  document.getElementById("resultsState").textContent = resultsMode ? "AAN" : "UIT";
+
+  document.querySelectorAll(".view-section").forEach(s => s.classList.remove("active"));
+  document.getElementById("view-" + activeView).classList.add("active");
+
+  if (activeView === "matches") renderMatches();
+  else if (activeView === "standings") renderStandings();
+  else if (activeView === "drinks") renderDrinks();
+  else if (activeView === "todrink") renderToDrink();
+
+  renderStats();
+}
+
+/* ====================== QUOTES ====================== */
+let lastQuoteIdx = -1;
+function showRandomQuote() {
+  let idx;
+  do { idx = Math.floor(Math.random() * QUOTES.length); }
+  while (idx === lastQuoteIdx && QUOTES.length > 1);
+  lastQuoteIdx = idx;
+  const q = QUOTES[idx];
+  const el = document.querySelector("#quoteBar .quote-text");
+  if (el) el.innerHTML = `<span class="quote-author">${q.author}:</span> "${q.text}"`;
+}
+
+function renderMatches() {
+  const root = document.getElementById("view-matches");
+  root.innerHTML = "";
+
+  const days = activeDay === "all"
+    ? Object.keys(DAY_LABELS)
+    : [activeDay];
+
+  days.forEach(day => {
+    const dayMatches = MATCHES.filter(m => m.date === day);
+    if (!dayMatches.length) return;
+
+    const block = document.createElement("div");
+    block.className = "day-block";
+    block.innerHTML = `<div class="day-title">${DAY_LABELS[day]}</div>`;
+
+    dayMatches.forEach(m => {
+      block.appendChild(renderMatchCard(m));
+    });
+
+    root.appendChild(block);
+  });
+}
+
+function renderMatchCard(m) {
+  const pred = predictions[m.id] || { h: "", a: "" };
+  const act  = results[m.id]     || { h: "", a: "" };
+  const bet  = drinkBets[m.id]   || { pick: "", amount: 1, unit: "Shotje", drink: "Jägermeister" };
+  const pts  = calcPoints(pred, act);
+  const drinkOutcome = calcDrinkResult(bet, act);
+
+  const card = document.createElement("div");
+  card.className = "match-card";
+
+  const ptsLabel = pts === 3 ? `<span class="pts win">🎯 +3 pt</span>`
+                  : pts === 1 ? `<span class="pts partial">✅ +1 pt</span>`
+                  : pts === 0 ? `<span class="pts miss">❌ 0 pt</span>`
+                  : "";
+
+  const drinkText = `${bet.amount} ${bet.unit.toLowerCase()}${bet.amount > 1 ? 's' : ''} ${bet.drink}`;
+  const drinkResultHtml = drinkOutcome === "won"
+    ? `<div class="drink-result won">✅ Tip juist! Tegenstander drinkt: ${drinkText}</div>`
+    : drinkOutcome === "lost"
+    ? `<div class="drink-result lost">❌ Tip fout! Jij drinkt: ${drinkText}</div>`
+    : "";
+
+  card.innerHTML = `
+    <div class="match-meta">
+      <span><span class="group-pill">Groep ${m.group}</span> · ${m.time} · ${m.venue}</span>
+      <span>${ptsLabel}</span>
+    </div>
+    <div class="team home">
+      <span class="name">${m.home}</span>
+      <span class="flag">${m.homeFlag}</span>
+    </div>
+    <div class="score-area">
+      <input class="score-input" type="number" min="0" max="20" inputmode="numeric"
+             data-mid="${m.id}" data-side="h" data-kind="pred" value="${pred.h}" />
+      <span class="score-sep">–</span>
+      <input class="score-input" type="number" min="0" max="20" inputmode="numeric"
+             data-mid="${m.id}" data-side="a" data-kind="pred" value="${pred.a}" />
+    </div>
+    <div class="team away">
+      <span class="flag">${m.awayFlag}</span>
+      <span class="name">${m.away}</span>
+    </div>
+
+    <div class="drink-row">
+      <span class="label-icon">🍺</span>
+      <span>Wint:</span>
+      <div class="drink-segment" data-mid="${m.id}">
+        <button data-pick="h" class="${bet.pick === 'h' ? 'active' : ''}" title="${m.home}">${m.homeFlag}</button>
+        <button data-pick="d" class="${bet.pick === 'd' ? 'active' : ''}">Gelijk</button>
+        <button data-pick="a" class="${bet.pick === 'a' ? 'active' : ''}" title="${m.away}">${m.awayFlag}</button>
+      </div>
+      <span>Inzet:</span>
+      <input type="number" min="1" max="20" data-mid="${m.id}" data-bet="amount" value="${bet.amount}" />
+      <select data-mid="${m.id}" data-bet="unit">
+        ${UNITS.map(u => `<option value="${u}" ${bet.unit === u ? "selected" : ""}>${u}</option>`).join("")}
+      </select>
+      <select data-mid="${m.id}" data-bet="drink">
+        ${DRINKS.map(d => `<option value="${d}" ${bet.drink === d ? "selected" : ""}>${d}</option>`).join("")}
+      </select>
+      ${drinkResultHtml}
+    </div>
+
+    ${resultsMode ? `
+      <div class="row-actual">
+        <span class="label">Werkelijke uitslag:</span>
+        <input class="score-input actual" type="number" min="0" max="20" inputmode="numeric"
+               data-mid="${m.id}" data-side="h" data-kind="actual" value="${act.h}" />
+        <span class="score-sep">–</span>
+        <input class="score-input actual" type="number" min="0" max="20" inputmode="numeric"
+               data-mid="${m.id}" data-side="a" data-kind="actual" value="${act.a}" />
+      </div>
+    ` : (act.h !== "" && act.a !== "" ? `
+      <div class="row-actual">
+        <span class="label">Werkelijk: ${act.h} – ${act.a}</span>
+      </div>
+    ` : "")}
+  `;
+
+  card.querySelectorAll(".score-input").forEach(inp => {
+    inp.addEventListener("input", onScoreChange);
+  });
+
+  // Drink betting handlers
+  card.querySelectorAll(".drink-segment button").forEach(btn => {
+    btn.addEventListener("click", onDrinkPickChange);
+  });
+  card.querySelectorAll("[data-bet]").forEach(el => {
+    el.addEventListener(el.tagName === "SELECT" ? "change" : "input", onDrinkBetChange);
+  });
+
+  return card;
+}
+
+function onScoreChange(e) {
+  const inp = e.target;
+  const mid = inp.dataset.mid;
+  const side = inp.dataset.side;
+  const kind = inp.dataset.kind;
+  let val = inp.value.trim();
+  if (val !== "") {
+    const n = parseInt(val, 10);
+    if (isNaN(n) || n < 0) val = "";
+    else if (n > 20) val = "20";
+    else val = String(n);
+    inp.value = val;
+  }
+  const store = kind === "pred" ? predictions : results;
+  if (!store[mid]) store[mid] = { h: "", a: "" };
+  store[mid][side] = val;
+  save();
+  renderStats();
+  // re-render only this card's pts label + standings if results changed
+  if (kind === "actual") {
+    renderMatches();
+    if (activeView === "standings") renderStandings();
+  } else {
+    // refresh just the points pill on this card
+    const card = inp.closest(".match-card");
+    const meta = card.querySelector(".match-meta span:last-child");
+    const pred = predictions[mid] || { h: "", a: "" };
+    const act  = results[mid]     || { h: "", a: "" };
+    const pts  = calcPoints(pred, act);
+    meta.innerHTML = pts === 3 ? `<span class="pts win">🎯 +3 pt</span>`
+                    : pts === 1 ? `<span class="pts partial">✅ +1 pt</span>`
+                    : pts === 0 ? `<span class="pts miss">❌ 0 pt</span>`
+                    : "";
+  }
+}
+
+function renderStats() {
+  let total = 0, exact = 0, predicted = 0;
+  let totalPredictable = 0;
+  let drinksWon = 0, drinksLost = 0;
+
+  MATCHES.forEach(m => {
+    const p = predictions[m.id];
+    if (p && p.h !== "" && p.a !== "") predicted++;
+    totalPredictable++;
+    const pts = calcPoints(p, results[m.id]);
+    if (pts !== null) {
+      total += pts;
+      if (pts === 3) exact++;
+    }
+    const bet = drinkBets[m.id];
+    const dr = calcDrinkResult(bet, results[m.id]);
+    if (dr === "won")  drinksWon  += +bet.amount;
+    if (dr === "lost") drinksLost += +bet.amount;
+  });
+
+  document.getElementById("stat-points").textContent = total;
+  document.getElementById("stat-predicted").textContent = `${predicted} / ${totalPredictable}`;
+  document.getElementById("stat-exact").textContent = exact;
+  document.getElementById("stat-drinks-won").textContent = drinksWon;
+  document.getElementById("stat-drinks-lost").textContent = drinksLost;
+}
+
+/* ====================== DRINK HANDLERS ====================== */
+function ensureBet(mid) {
+  if (!drinkBets[mid]) drinkBets[mid] = { pick: "", amount: 1, unit: "Shotje", drink: "Jägermeister" };
+  return drinkBets[mid];
+}
+
+function onDrinkPickChange(e) {
+  const btn = e.currentTarget;
+  const mid = btn.parentElement.dataset.mid;
+  const pick = btn.dataset.pick;
+  const bet = ensureBet(mid);
+  // toggle off als opnieuw geklikt
+  bet.pick = (bet.pick === pick) ? "" : pick;
+  save();
+  refreshCard(mid);
+  renderStats();
+}
+
+function onDrinkBetChange(e) {
+  const el = e.currentTarget;
+  const mid = el.dataset.mid;
+  const field = el.dataset.bet;
+  const bet = ensureBet(mid);
+  if (field === "amount") {
+    let n = parseInt(el.value, 10);
+    if (isNaN(n) || n < 1) n = 1;
+    if (n > 20) n = 20;
+    bet.amount = n;
+    el.value = n;
+  } else {
+    bet[field] = el.value;
+  }
+  save();
+  refreshCard(mid);
+  renderStats();
+}
+
+function refreshCard(mid) {
+  // herrender alleen deze card
+  const oldCard = document.querySelector(`.match-card [data-mid="${mid}"]`)?.closest(".match-card");
+  if (!oldCard) return;
+  const m = MATCHES.find(x => x.id === mid);
+  if (!m) return;
+  const newCard = renderMatchCard(m);
+  oldCard.replaceWith(newCard);
+}
+
+/* ====================== STANDINGS ====================== */
+function buildStandings() {
+  const groups = {};
+  MATCHES.forEach(m => {
+    if (!groups[m.group]) groups[m.group] = {};
+    [[m.home, m.homeFlag], [m.away, m.awayFlag]].forEach(([n, f]) => {
+      if (!groups[m.group][n]) groups[m.group][n] = { name: n, flag: f, P:0, W:0, D:0, L:0, GF:0, GA:0, GD:0, Pts:0 };
+    });
+  });
+
+  MATCHES.forEach(m => {
+    const r = results[m.id];
+    if (!r || r.h === "" || r.a === "") return;
+    const h = +r.h, a = +r.a;
+    const home = groups[m.group][m.home];
+    const away = groups[m.group][m.away];
+    home.P++; away.P++;
+    home.GF += h; home.GA += a;
+    away.GF += a; away.GA += h;
+    if (h > a) { home.W++; away.L++; home.Pts += 3; }
+    else if (h < a) { away.W++; home.L++; away.Pts += 3; }
+    else { home.D++; away.D++; home.Pts++; away.Pts++; }
+    home.GD = home.GF - home.GA;
+    away.GD = away.GF - away.GA;
+  });
+
+  return groups;
+}
+
+function renderStandings() {
+  const root = document.getElementById("view-standings");
+  const groups = buildStandings();
+  const sortedGroups = Object.keys(groups).sort();
+  if (!sortedGroups.length) { root.innerHTML = "<p>Geen groepen.</p>"; return; }
+
+  let html = `<div class="help" style="margin-bottom:18px;">
+    Standen worden berekend op basis van werkelijke uitslagen die je invult (klik op "Resultaten invullen" boven). De top 2 per groep + 8 beste nummers 3 gaan door (groene rijen = top 2).
+  </div>`;
+
+  sortedGroups.forEach(g => {
+    const teams = Object.values(groups[g]).sort((a, b) =>
+      b.Pts - a.Pts || b.GD - a.GD || b.GF - a.GF || a.name.localeCompare(b.name)
+    );
+    html += `<div class="group-section"><h3>Groep ${g}</h3>
+      <table class="standings">
+        <thead><tr>
+          <th style="text-align:left;">Team</th>
+          <th>P</th><th>W</th><th>G</th><th>V</th><th>DV</th><th>DT</th><th>DS</th><th>Pt</th>
+        </tr></thead>
+        <tbody>
+          ${teams.map((t, i) => `
+            <tr class="${i < 2 ? 'qualify' : ''}">
+              <td class="team-col">${t.flag} ${t.name}</td>
+              <td>${t.P}</td><td>${t.W}</td><td>${t.D}</td><td>${t.L}</td>
+              <td>${t.GF}</td><td>${t.GA}</td><td>${t.GD > 0 ? '+'+t.GD : t.GD}</td>
+              <td><strong>${t.Pts}</strong></td>
+            </tr>
+          `).join("")}
+        </tbody>
+      </table>
+    </div>`;
+  });
+
+  root.innerHTML = html;
+}
+
+/* ====================== DRINKS SUMMARY VIEW ====================== */
+function renderDrinks() {
+  const root = document.getElementById("view-drinks");
+  const won = {}, lost = {}; // sleutel: "drink — unit"
+  let totalWon = 0, totalLost = 0;
+  const detail = []; // per match
+
+  MATCHES.forEach(m => {
+    const bet = drinkBets[m.id];
+    const dr = calcDrinkResult(bet, results[m.id]);
+    if (!dr) return;
+    const key = `${bet.drink} — ${bet.unit}`;
+    const tgt = dr === "won" ? won : lost;
+    tgt[key] = (tgt[key] || 0) + (+bet.amount);
+    if (dr === "won")  totalWon  += +bet.amount;
+    if (dr === "lost") totalLost += +bet.amount;
+    detail.push({ m, bet, dr });
+  });
+
+  const renderList = obj => {
+    const keys = Object.keys(obj).sort();
+    if (!keys.length) return `<div class="empty">Nog niets…</div>`;
+    return `<ul>${keys.map(k => `<li><span>${k}</span><span class="amt">${obj[k]}×</span></li>`).join("")}</ul>`;
+  };
+
+  root.innerHTML = `
+    <div class="help" style="margin-bottom:18px;">
+      🍺 Tip wie er wint per match (klik op een vlag of "Gelijk") en kies hoeveel + welke drank je inzet.
+      Als je tip <strong>juist</strong> is moet je tegenstander drinken. <strong>Fout</strong> = jij drinkt zelf.
+    </div>
+
+    <div class="drinks-summary">
+      <div class="drink-card won">
+        <h3>🍻 Tegenstander drinkt — totaal ${totalWon}</h3>
+        ${renderList(won)}
+      </div>
+      <div class="drink-card lost">
+        <h3>😵 Jij drinkt — totaal ${totalLost}</h3>
+        ${renderList(lost)}
+      </div>
+    </div>
+
+    ${detail.length ? `
+      <div style="margin-top:24px;">
+        <h3 style="color:var(--muted); text-transform:uppercase; font-size:0.85rem; letter-spacing:0.1em;">Per match</h3>
+        ${detail.map(({ m, bet, dr }) => `
+          <div class="match-card" style="grid-template-columns:1fr;">
+            <div class="match-meta">
+              <span><span class="group-pill">Groep ${m.group}</span> · ${m.homeFlag} ${m.home} – ${m.away} ${m.awayFlag}</span>
+              <span class="${dr === 'won' ? 'pts win' : 'pts miss'}">${dr === 'won' ? '✅ Tegenstander' : '❌ Jij'} drinkt</span>
+            </div>
+            <div style="text-align:center; font-size:1.05rem; font-weight:600;">
+              ${bet.amount}× ${bet.unit} ${bet.drink}
+            </div>
+          </div>
+        `).join("")}
+      </div>
+    ` : ""}
+  `;
+}
+
+/* ====================== "WAT MOET IK DRINKEN" VIEW ====================== */
+function renderToDrink() {
+  const root = document.getElementById("view-todrink");
+  const items = []; // {m, bet}
+  const totals = {}; // "drink — unit" -> aantal
+  let grandTotal = 0;
+
+  MATCHES.forEach(m => {
+    const bet = drinkBets[m.id];
+    const dr = calcDrinkResult(bet, results[m.id]);
+    if (dr === "lost") {
+      items.push({ m, bet });
+      const k = `${bet.drink} — ${bet.unit}`;
+      totals[k] = (totals[k] || 0) + (+bet.amount);
+      grandTotal += +bet.amount;
+    }
+  });
+
+  const totalsKeys = Object.keys(totals).sort();
+  const totalsHtml = totalsKeys.length
+    ? `<ul>${totalsKeys.map(k => `<li><span>${k}</span><span class="amt">${totals[k]}×</span></li>`).join("")}</ul>`
+    : `<div class="empty">Nog niets te drinken — proost! 🍻</div>`;
+
+  const itemsHtml = items.length
+    ? items.map(({ m, bet }) => {
+        const r = results[m.id];
+        const correct = m.home + " " + m.homeFlag; // dummy, see below
+        const winnerName = (+r.h > +r.a) ? `${m.homeFlag} ${m.home}` : (+r.h < +r.a) ? `${m.awayFlag} ${m.away}` : "Gelijkspel";
+        const tipName = bet.pick === "h" ? `${m.homeFlag} ${m.home}` : bet.pick === "a" ? `${m.awayFlag} ${m.away}` : "Gelijkspel";
+        return `
+          <div class="match-card todrink-card" style="grid-template-columns:1fr;">
+            <div class="match-meta">
+              <span><span class="group-pill">Groep ${m.group}</span> · ${m.homeFlag} ${m.home} <strong>${r.h}–${r.a}</strong> ${m.away} ${m.awayFlag}</span>
+              <span class="pts miss">😵 Drinken</span>
+            </div>
+            <div style="display:flex; flex-wrap:wrap; gap:14px; justify-content:space-between; align-items:center;">
+              <div style="font-size:0.85rem; color:var(--muted);">
+                Jouw tip: <strong style="color:var(--text);">${tipName}</strong> — gewonnen: <strong style="color:var(--good);">${winnerName}</strong>
+              </div>
+              <div style="font-size:1.15rem; font-weight:700; color:var(--danger);">
+                🥃 ${bet.amount}× ${bet.unit} ${bet.drink}
+              </div>
+            </div>
+          </div>
+        `;
+      }).join("")
+    : `<div class="help" style="text-align:center;">Geen verloren weddenschappen (yet). Drink met mate, scoor met overmate. 🏆</div>`;
+
+  root.innerHTML = `
+    <div class="help" style="margin-bottom:18px; border-color: rgba(230,57,70,0.4); background: linear-gradient(135deg, rgba(230,57,70,0.06), rgba(255,159,28,0.06));">
+      🥃 <strong>Hier zie je álles wat jij moet drinken</strong> — samengeteld op basis van afgelopen matchen waar jouw tip fout was. Ad fundum, oeleboele.
+    </div>
+
+    <div class="drink-card lost" style="margin-bottom:20px;">
+      <h3>😵 Totaal te drinken — ${grandTotal} stuks</h3>
+      ${totalsHtml}
+    </div>
+
+    ${items.length ? `<h3 style="color:var(--muted); text-transform:uppercase; font-size:0.85rem; letter-spacing:0.1em; margin:16px 0 8px;">📋 Per match</h3>` : ""}
+    ${itemsHtml}
+  `;
+}
+
+/* ====================== UI HANDLERS ====================== */
+document.getElementById("tabs").addEventListener("click", e => {
+  if (e.target.tagName !== "BUTTON") return;
+  const view = e.target.dataset.view;
+  if (view === "matches") {
+    activeView = "matches";
+    activeDay = e.target.dataset.day || "all";
+  } else if (view === "standings") {
+    activeView = "standings";
+  } else if (view === "drinks") {
+    activeView = "drinks";
+  } else if (view === "todrink") {
+    activeView = "todrink";
+  }
+  document.querySelectorAll("#tabs button").forEach(b => b.classList.remove("active"));
+  e.target.classList.add("active");
+  render();
+});
+
+document.getElementById("btnNewQuote").addEventListener("click", showRandomQuote);
+
+document.getElementById("toggleResults").addEventListener("click", () => {
+  resultsMode = !resultsMode;
+  save();
+  render();
+});
+
+document.getElementById("btnHelp").addEventListener("click", () => openModal("helpModal"));
+document.getElementById("btnReset").addEventListener("click", () => openModal("resetModal"));
+
+function sanitizeName(n) {
+  return n.trim().replace(/[^a-zA-Z0-9_\- ]/g, "").replace(/\s+/g, "_");
+}
+
+function updateExportPreview() {
+  const raw = document.getElementById("exportName").value;
+  const safe = sanitizeName(raw) || "naam";
+  const date = new Date().toISOString().slice(0, 10);
+  document.getElementById("exportPreview").textContent = `WK2026-${safe}-${date}.json`;
+}
+
+document.getElementById("btnExport").addEventListener("click", () => {
+  const inp = document.getElementById("exportName");
+  inp.value = userName || "";
+  updateExportPreview();
+  openModal("exportModal");
+  setTimeout(() => inp.focus(), 50);
+});
+
+document.getElementById("exportName").addEventListener("input", updateExportPreview);
+
+document.getElementById("btnExportConfirm").addEventListener("click", () => {
+  const raw = document.getElementById("exportName").value.trim();
+  if (!raw) {
+    alert("Vul eerst je naam in!");
+    document.getElementById("exportName").focus();
+    return;
+  }
+  userName = raw;
+  save();
+  const safe = sanitizeName(raw);
+  const date = new Date().toISOString().slice(0, 10);
+  const data = {
+    name: raw,
+    exportedAt: new Date().toISOString(),
+    predictions, results, drinkBets
+  };
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `WK2026-${safe}-${date}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  closeModal("exportModal");
+});
+
+document.getElementById("btnImport").addEventListener("click", () => {
+  document.getElementById("importFile").click();
+});
+
+document.getElementById("importFile").addEventListener("change", e => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    try {
+      const data = JSON.parse(ev.target.result);
+      if (data.predictions) predictions = data.predictions;
+      if (data.results) results = data.results;
+      if (data.drinkBets) drinkBets = data.drinkBets;
+      if (data.name) userName = data.name;
+      save();
+      render();
+      alert(`Import gelukt!${data.name ? " (van " + data.name + ")" : ""}`);
+    } catch (err) {
+      alert("Ongeldig bestand.");
+    }
+  };
+  reader.readAsText(file);
+  e.target.value = "";
+});
+
+function openModal(id) { document.getElementById(id).classList.add("open"); }
+function closeModal(id) { document.getElementById(id).classList.remove("open"); }
+function doReset() {
+  predictions = {};
+  results = {};
+  drinkBets = {};
+  save();
+  closeModal("resetModal");
+  render();
+}
+
+document.querySelectorAll(".modal").forEach(m => {
+  m.addEventListener("click", e => { if (e.target === m) m.classList.remove("open"); });
+});
+
+/* ====================== INIT ====================== */
+showRandomQuote();
+render();
+</script>
+
+</body>
+</html>
